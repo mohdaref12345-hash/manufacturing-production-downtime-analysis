@@ -3,7 +3,7 @@
 **Project type:** Industrial Engineering | Data Analytics | Business Intelligence
 **Tools:** Microsoft Excel, Power BI, Power Query, DAX
 
-**Quick links:** [Portfolio page](portfolio.html) | [Power BI dashboard](Manufacturing_Production_Downtime_Analysis.pbix) | [Cleaned data](Manufacturing_Cleaned_Data.xlsx) | [Analytics report (PDF)](Manufacturing_Analytics_Report.pdf) | [DAX measures](DAX_Measures.txt)
+**Quick links:** [Portfolio page (live)](https://mohdaref12345-hash.github.io/manufacturing-production-downtime-analysis/portfolio.html) | [Power BI dashboard](Manufacturing_Production_Downtime_Analysis.pbix) | [Cleaned data](Manufacturing_Cleaned_Data.xlsx) | [Analytics report (PDF)](Manufacturing_Analytics_Report.pdf) | [DAX measures](DAX_Measures.txt)
 
 ## Dashboard preview
 
@@ -16,7 +16,7 @@
 
 - **Repository:** [https://github.com/mohdaref12345-hash/manufacturing-production-downtime-analysis](https://github.com/mohdaref12345-hash/manufacturing-production-downtime-analysis)
 - **Power BI file (download and open in Power BI Desktop):** [Manufacturing_Production_Downtime_Analysis.pbix](https://github.com/mohdaref12345-hash/manufacturing-production-downtime-analysis/raw/main/Manufacturing_Production_Downtime_Analysis.pbix)
-- **Portfolio page:** download [portfolio.html](https://github.com/mohdaref12345-hash/manufacturing-production-downtime-analysis/raw/main/portfolio.html) and open it in a browser (GitHub shows the source, not the page).
+- **Portfolio page (opens as a normal web page):** [https://mohdaref12345-hash.github.io/manufacturing-production-downtime-analysis/portfolio.html](https://mohdaref12345-hash.github.io/manufacturing-production-downtime-analysis/portfolio.html)
 
 Steps:
 1. Click the `.pbix` link above (or the file in the repository, then Download raw file).
@@ -148,7 +148,7 @@ Answers to five analysis questions and four recommendations, all computed from t
 ```
 manufacturing-production-downtime-analysis/
 |-- README.md                                       <- this file
-|-- portfolio.html                                  <- portfolio page (open in a browser; images embedded)
+|-- portfolio.html                                  <- portfolio page (live on GitHub Pages; images embedded)
 |-- Manufacturing_Production_Downtime_Analysis.pbix <- Power BI dashboard (6 sections)
 |-- Manufacturing_Cleaned_Data.xlsx                 <- cleaned data + Data_Quality_Log + Reconciliation
 |-- Manufacturing_Analytics_Report.pdf              <- written analytics report
