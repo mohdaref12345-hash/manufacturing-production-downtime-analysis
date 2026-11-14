@@ -1,0 +1,57 @@
+DAX MEASURES  (table: _Measures, exported from the Power BI model of Manufacturing_Production_Downtime_Analysis.pbix)
+Validated against Production_raw.xlsx on 2026-11-14.
+
+--- Production ---
+Total Production Units = SUM(daily_operation_summary[production_units])                    -> 60,888
+Total Liters Produced  = SUM(daily_operation_summary[liters_produced])                     -> 212,358
+Hourly Production Units = SUM(processed_hourly[production_gallons])                        -> 60,692  (column is labelled gallons but holds units)
+Production Days        = DISTINCTCOUNT(daily_operation_summary[date])                      -> 56
+Avg Daily Production   = DIVIDE([Total Production Units],[Production Days])                -> 1,087
+Avg Production Rate (units per op hour) = DIVIDE([Hourly Production Units],[Total Operating Time (h)])  -> 593.6
+Top 5 Days Units = VAR r = RANKX(ALLSELECTED('Date'[Date]),[Total Production Units],,DESC,Dense) RETURN IF(NOT ISBLANK([Total Production Units]) && r<=5,[Total Production Units])
+Bottom 5 Days Units = VAR d = FILTER(ALLSELECTED('Date'[Date]),[Total Production Units]>0) VAR r = RANKX(d,[Total Production Units],,ASC,Dense) RETURN IF(NOT ISBLANK([Total Production Units]) && r<=5,[Total Production Units])
+
+--- Time and Efficiency (hourly table is the source) ---
+Total Monitored Time (h) = SUM(hourly_operation_breakdown[monitored_time_h])               -> 226.1
+Total Operating Time (h) = SUM(hourly_operation_breakdown[operation_time_h])               -> 102.3
+Total Downtime (h)       = SUM(hourly_operation_breakdown[downtime_h])                     -> 123.8
+Operating Efficiency     = DIVIDE([Total Operating Time (h)],[Total Monitored Time (h)])  -> 45.2%
+Downtime Percentage      = DIVIDE([Total Downtime (h)],[Total Monitored Time (h)])        -> 54.8%
+Product Efficiency       = DIVIDE(SUM(daily_operation_summary[operation_time_dec]),SUM(daily_operation_summary[monitored_time_dec]))  -- daily table; use only with product on the axis
+Opportunity Note = "Downtime is "&FORMAT([Downtime Percentage],"0.0%")&" of monitored time ("&FORMAT([Total Downtime (h)],"#,0.0")&" h); operating efficiency "&FORMAT([Operating Efficiency],"0.0%")
+
+--- Downtime (event log) ---
+Total Downtime Events = COUNTROWS(downtime_event_log)                                      -> 1,388
+Event Log Downtime (h) = SUM(downtime_event_log[duration_min])/60                          -> 131.9
+Avg Downtime Duration (min) = AVERAGE(downtime_event_log[duration_min])                    -> 5.70
+Max Downtime Duration (min) = MAX(downtime_event_log[duration_min])                        -> 349.8
+Top 10 Event Duration (min) = VAR r = RANKX(ALLSELECTED(downtime_event_log[downtime_id]),[Max Downtime Duration (min)],,DESC,Dense) RETURN IF(r<=10,[Max Downtime Duration (min)])
+
+Note: the open model's event log still holds the original 2022-01-13 date for 18 events; Manufacturing_Cleaned_Data.xlsx carries the corrected 2023-01-13.
+
+Model change: Date[MonthYear] is sorted by Date[MonthYearSort] so month charts run in date order.
+
+--- Where each measure is used (dashboard sections) ---
+Home         : Total Production Units, Total Downtime (h), Operating Efficiency (card label "Average Efficiency"), Total Operating Time (h)
+Production   : Total Production Units, Avg Daily Production, Total Liters Produced, Avg Production Rate (units per op hour), Production Days, Hourly Production Units
+Downtime     : Event Log Downtime (h), Total Downtime Events, Avg Downtime Duration (min), Max Downtime Duration (min), Downtime Percentage, Top 10 Event Duration (min)
+Product      : Total Production Units, Total Liters Produced, Product Efficiency, Avg Daily Production
+Performance  : Operating Efficiency, Total Operating Time (h), Total Monitored Time (h), Downtime Percentage, Avg Production Rate (units per op hour)
+Findings     : 6 live cards (Lowest Day Units, Days Under 500 Units, Long Stops (30+ min), Long Stops Share of Downtime, Product 3 Share of Units, Efficiency Gap 3 L vs 5 L (pts)), 3 charts (Bottom 5 Days Units by date, Downtime Percentage by hour, Product Efficiency by product) and 4 text recommendations. Cards and charts react to the Date and Product slicers; the recommendation text is fixed.
+Dashboard-wide: Date slicer (Between), Product slicer, Reset Filters button (bookmark).
+
+--- Findings section: live card measures (table _Measures, display folder Findings) ---
+Lowest Day Units = MINX(FILTER(VALUES('Date'[Date]),[Total Production Units]>0),[Total Production Units])   -> 225
+Days Under 500 Units = COUNTROWS(FILTER(VALUES('Date'[Date]),[Total Production Units]>0 && [Total Production Units]<500))   -> 8
+Long Stops (30+ min) = CALCULATE(COUNTROWS(downtime_event_log),downtime_event_log[duration_min]>=30)   -> 49
+Long Stops Share of Downtime = DIVIDE(CALCULATE(SUM(downtime_event_log[duration_min]),downtime_event_log[duration_min]>=30),SUM(downtime_event_log[duration_min]))   -> 57.6%
+Product 3 Share of Units = DIVIDE(CALCULATE([Total Production Units],'Product'[Product]="Product 3"),CALCULATE([Total Production Units],ALLSELECTED('Product')))   -> 75.6%
+Efficiency Gap 3 L vs 5 L (pts) = (CALCULATE([Product Efficiency],'Product'[Product]="Product 3")-CALCULATE([Product Efficiency],'Product'[Product]="Product 5"))*100   -> 6.5
+
+--- Findings section: figures behind the text (for checking) ---
+Lowest days (units)        : Dec 16 2022 = 225, Oct 20 = 301, Jan 2 2023 = 312, Nov 14 = 330, Dec 26 = 342 (measure: Bottom 5 Days Units); 8 of 56 days under 500 units
+Highest days (units)       : Jul 22 2022 = 2,849, Jul 26 = 2,243, Dec 21 = 2,148 (measure: Top 5 Days Units)
+Event-log downtime         : 131.9 h; events of 30+ min = 49 (3.5% of events) = 75.9 h = 57.6% of event-log downtime
+Efficiency by product      : Product 3 (3 L) 44.7%, Product 5 (5 L) 38.2% (measure: Product Efficiency)
+Downtime vs efficiency     : correlation of daily downtime with efficiency = -0.55; daily units vs efficiency about 0
+
