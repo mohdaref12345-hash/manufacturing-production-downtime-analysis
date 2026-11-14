@@ -7,9 +7,10 @@
 
 ## Dashboard preview
 
-![Home](screenshots/Home.jpg)
+![Home](Home.jpg)
 
-Open the full dashboard sections: [Home](screenshots/Home.jpg) | [Production](screenshots/Production.jpg) | [Downtime](screenshots/Downtime.jpg) | [Product](screenshots/Product.jpg) | [Performance](screenshots/Performance.jpg) | [Findings](screenshots/Findings.jpg)
+[Open full-size image: Home.jpg](Home.jpg)
+
 
 ## How to open the dashboard
 
@@ -23,7 +24,7 @@ Steps:
 3. Use the sidebar buttons (Home, Production, Downtime, Product, Performance, Findings) to switch sections. In Desktop edit mode hold **Ctrl** while clicking a button, or use View > Bookmarks. In the Power BI service a normal click works.
 4. Use the Date and Product slicers and the **Reset Filters** button on any section.
 
-The dashboard is a Power BI file, so it has no public web link unless it is published to the Power BI service; the screenshots below show every section.
+The dashboard is a Power BI file, so it has no public web link unless it is published to the Power BI service; the images below show every section.
 
 ## 1. Project objective
 
@@ -49,9 +50,11 @@ Data notes (documented, not hidden):
 
 The dashboard file is [Manufacturing_Production_Downtime_Analysis.pbix](Manufacturing_Production_Downtime_Analysis.pbix); the measures are listed in [DAX_Measures.txt](DAX_Measures.txt). The sidebar buttons switch sections through bookmarks. In Power BI Desktop edit mode use **Ctrl+click** on a button (or View > Bookmarks); in the published service a normal click works. Date and Product slicers and a **Reset Filters** button are on every section.
 
-### 3.1 Home ([Home.jpg](screenshots/Home.jpg))
+### 3.1 Home
 
-![Home](screenshots/Home.jpg)
+![Home](Home.jpg)
+
+[Open full-size image: Home.jpg](Home.jpg)
 
 Headline KPIs: total production, downtime, average efficiency and operating time, with daily and monthly production, hourly operating vs downtime, and product mix.
 
@@ -60,9 +63,11 @@ Headline KPIs: total production, downtime, average efficiency and operating time
 - 45.2% average efficiency
 - 102.3 h total operating time
 
-### 3.2 Production Analysis ([Production.jpg](screenshots/Production.jpg))
+### 3.2 Production Analysis
 
-![Production Analysis](screenshots/Production.jpg)
+![Production Analysis](Production.jpg)
+
+[Open full-size image: Production.jpg](Production.jpg)
 
 Production by date, by hour of day and by month, with units per day and units per operating hour.
 
@@ -71,9 +76,11 @@ Production by date, by hour of day and by month, with units per day and units pe
 - 212K liters produced
 - Output peaks at 14:00-16:00; December 2022 is the highest month
 
-### 3.3 Downtime Analysis ([Downtime.jpg](screenshots/Downtime.jpg))
+### 3.3 Downtime Analysis
 
-![Downtime Analysis](screenshots/Downtime.jpg)
+![Downtime Analysis](Downtime.jpg)
+
+[Open full-size image: Downtime.jpg](Downtime.jpg)
 
 Downtime hours by date, event counts by start hour, and the ten longest events.
 
@@ -82,9 +89,11 @@ Downtime hours by date, event counts by start hour, and the ten longest events.
 - Event-log downtime 131.9 h
 - Most events start between 14:00 and 16:00
 
-### 3.4 Product Analysis ([Product.jpg](screenshots/Product.jpg))
+### 3.4 Product Analysis
 
-![Product Analysis](screenshots/Product.jpg)
+![Product Analysis](Product.jpg)
+
+[Open full-size image: Product.jpg](Product.jpg)
 
 Production by product, units vs liters, and average daily production per product.
 
@@ -93,9 +102,11 @@ Production by product, units vs liters, and average daily production per product
 - Product 3 is 76% of units, but in liters it is 138K vs 74K
 - Product efficiency 42.7%
 
-### 3.5 Operating Performance ([Performance.jpg](screenshots/Performance.jpg))
+### 3.5 Operating Performance
 
-![Operating Performance](screenshots/Performance.jpg)
+![Operating Performance](Performance.jpg)
+
+[Open full-size image: Performance.jpg](Performance.jpg)
 
 Operating vs monitored time by month, downtime percentage by hour, and the efficiency trend by date.
 
@@ -104,9 +115,11 @@ Operating vs monitored time by month, downtime percentage by hour, and the effic
 - Downtime share is highest at 07:00-08:00 and 12:00-13:00
 - Efficiency swings between about 15% and 80% by day
 
-### 3.6 Findings & Recommendations ([Findings.jpg](screenshots/Findings.jpg))
+### 3.6 Findings & Recommendations
 
-![Findings & Recommendations](screenshots/Findings.jpg)
+![Findings & Recommendations](Findings.jpg)
+
+[Open full-size image: Findings.jpg](Findings.jpg)
 
 Answers to five analysis questions and four recommendations, all computed from the data.
 
@@ -133,20 +146,19 @@ Answers to five analysis questions and four recommendations, all computed from t
 ## 6. Repository structure
 
 ```
-Manufacturing_Production_Downtime_Analysis/
-|-- README.md                                      <- this file
-|-- portfolio.html                                 <- portfolio page (open in a browser; images embedded)
+manufacturing-production-downtime-analysis/
+|-- README.md                                       <- this file
+|-- portfolio.html                                  <- portfolio page (open in a browser; images embedded)
 |-- Manufacturing_Production_Downtime_Analysis.pbix <- Power BI dashboard (6 sections)
-|-- Manufacturing_Cleaned_Data.xlsx                <- cleaned data + Data_Quality_Log + Reconciliation
-|-- Manufacturing_Analytics_Report.pdf             <- written analytics report
-|-- DAX_Measures.txt                               <- DAX measures
-`-- screenshots/
-    |-- Home.jpg
-    |-- Production.jpg
-    |-- Downtime.jpg
-    |-- Product.jpg
-    |-- Performance.jpg
-    `-- Findings.jpg
+|-- Manufacturing_Cleaned_Data.xlsx                 <- cleaned data + Data_Quality_Log + Reconciliation
+|-- Manufacturing_Analytics_Report.pdf              <- written analytics report
+|-- DAX_Measures.txt                                <- DAX measures
+|-- Home.jpg
+|-- Production.jpg
+|-- Downtime.jpg
+|-- Product.jpg
+|-- Performance.jpg
+`-- Findings.jpg
 ```
 
-Each screenshot is named after the sidebar button of the dashboard section it shows (Home, Production, Downtime, Product, Performance, Findings).
+Each image is named after the sidebar button of the dashboard section it shows (Home, Production, Downtime, Product, Performance, Findings).
